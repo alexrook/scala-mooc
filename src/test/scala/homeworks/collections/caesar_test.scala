@@ -5,7 +5,15 @@ import org.scalatest.flatspec.AnyFlatSpec
 
 class caesar_test extends AnyFlatSpec {
 
-  "caesar encryptor" should "encrypt and decrypt simple words" in {
+  "caesar encryptor" should "encrypt simple words" in {
+    assert(encrypt("SCALA", 2) === "UECNC")
+  }
+
+  it should "decrypt simple words" in {
+    assert(decrypt("UECNC", 2) === "SCALA")
+  }
+
+  it should "encrypt and decrypt simple words" in {
     assert(encrypt("SCALA", 2) === "UECNC")
     assert(decrypt("UECNC", 2) === "SCALA")
   }
@@ -29,4 +37,5 @@ class caesar_test extends AnyFlatSpec {
   it should "consider cycles" in {
     assert(encrypt("XYZ", 3) === "ABC")
   }
+
 }
