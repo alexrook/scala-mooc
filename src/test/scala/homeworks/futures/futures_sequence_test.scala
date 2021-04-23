@@ -86,4 +86,5 @@ class futures_sequence_test extends AnyFlatSpec {
 
     assert(await(fullSequence[Int](List(failed1, failed2))) === (List(), List(ex1, ex2)))
   }
+  
 }
