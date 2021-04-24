@@ -1,6 +1,5 @@
 package homeworks.collections
 
-import homeworks.HomeworksUtils.TaskSyntax
 
 object task_caesar {
 
@@ -20,7 +19,7 @@ object task_caesar {
 
   /**
    * @param word   входное слово, которое необходимо зашифровать
-   * @param offset сдвиг вперёд по алфавиту
+   * @param offset сдвиг вперёд по алфавиту, неотрицательное целое число.
    * @return зашифрованное слово
    */
   def encrypt(word: String, offset: Int): String = {
@@ -28,14 +27,19 @@ object task_caesar {
     word.foldLeft("") {
       case (acc: String, char: Char) =>
         val idx: Int = Alphabet.indexOf(char)
+        val shift: Int = idx + newOffset
         if (idx > -1) {
-          val newChar: Char = if ((idx + newOffset) > (Alphabet.length - 1)) {
-            val ni = (idx + newOffset) - Alphabet.length
-            Alphabet(ni)
-          } else {
-            Alphabet(idx + newOffset)
-          }
+
+          val newChar: Char =
+            if (shift > (Alphabet.length - 1)) {
+              val ni: Int = shift - Alphabet.length
+              Alphabet(ni)
+            } else {
+              Alphabet(shift)
+            }
+
           acc :+ newChar
+
         } else {
           throw new CipherException(s"unsupported alphabet[$char]")
         }
@@ -44,7 +48,7 @@ object task_caesar {
 
   /**
    * @param cipher шифр, который необходимо расшифровать
-   * @param offset сдвиг вперёд по алфавиту
+   * @param offset сдвиг вперёд по алфавиту, неотрицательное целое число.
    * @return расшифрованное слово
    */
   def decrypt(cipher: String, offset: Int): String = {
@@ -52,14 +56,19 @@ object task_caesar {
     cipher.foldLeft("") {
       case (acc: String, char: Char) =>
         val idx: Int = Alphabet.indexOf(char)
+        val shift: Int = idx - newOffset
         if (idx > -1) {
-          val newChar: Char = if ((idx - newOffset) < 0) {
-            val ni = Alphabet.length + (idx - newOffset)
-            Alphabet(ni)
-          } else {
-            Alphabet(idx - newOffset)
-          }
+
+          val newChar: Char =
+            if (shift < 0) {
+              val ni: Int = Alphabet.length + shift
+              Alphabet(ni)
+            } else {
+              Alphabet(shift)
+            }
+
           acc :+ newChar
+
         } else {
           throw new CipherException(s"unsupported alphabet[$char]")
         }
