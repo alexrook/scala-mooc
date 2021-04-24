@@ -1,6 +1,6 @@
 package homeworks.collections
 
-import homeworks.collections.task_seq_riddle.nextLine
+import homeworks.collections.task_seq_riddle.{nextLine, nextLineV1}
 import org.scalatest.flatspec.AnyFlatSpec
 
 class seq_riddle_test extends AnyFlatSpec {
@@ -9,6 +9,12 @@ class seq_riddle_test extends AnyFlatSpec {
     assert(nextLine(List(1, 2, 1, 1)) === List(1, 1, 1, 2, 2, 1))
     assert(nextLine(List(1, 1, 1, 2, 2, 1)) === List(3, 1, 2, 2, 1, 1))
     assert(nextLine(List(3, 1, 2, 2, 1, 1)) === List(1, 3, 1, 1, 2, 2, 2, 1))
+  }
+
+  "nextLineV1" should "produce next line" in {
+    assert(nextLineV1(List(1, 2, 1, 1)) === List(1, 1, 1, 2, 2, 1))
+    assert(nextLineV1(List(1, 1, 1, 2, 2, 1)) === List(3, 1, 2, 2, 1, 1))
+    assert(nextLineV1(List(3, 1, 2, 2, 1, 1)) === List(1, 3, 1, 1, 2, 2, 2, 1))
   }
 
   "funSeq" should "produce next line" in {
